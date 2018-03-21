@@ -1,0 +1,28 @@
+{
+  "name": "esap_project",
+  "version": "1.0.0",
+  "description": "Application for the ESILV embedded systems project A4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "Data",
+    "RESTAPI"
+  ],
+  "author": "Matthias Exbrayat",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.15.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "formidable": "^1.2.1",
+    "fs": "0.0.1-security",
+    "mongoose": "^5.0.6",
+    "node-cmd": "^3.0.0",
+    "node-slackr": "^0.1.4",
+    "path": "^0.12.7"
+  }
+}

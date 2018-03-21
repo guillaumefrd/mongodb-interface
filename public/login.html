@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Please log in</h2>
+    <div id="result_form"></div>
+    <form id="login_form">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+
+    
+</div>
+
+</body>
+<script>
+    $("#login_form").submit(function (event) {
+        event.preventDefault();
+        var password = $("#pwd").val();
+        var username = $("#username").val();
+        var pageToRedirect = "projetNOSQL/admin";
+        $.post("http://localhost:3000/login",
+            {
+                username: username,
+                password: password
+            }, function (result) {
+                if (result === "true") {
+                    $("#result_form").html("" +
+                        '<div class="alert alert-success alert-dismissible">\n' +
+                        '  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+                        '  <strong>Success!</strong> You will be redirected...\n' +
+                        '</div>' +
+                        "");
+                        setTimeout(function () {
+                        window.location.replace("http://localhost:3000/" + pageToRedirect);
+                    }, 2000);
+                } else if (result === "false") {
+                    $("#result_form").html("" +
+                        '<div class="alert alert-warning alert-dismissible">\n' +
+                        '  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+                        '  <strong>Sorry!</strong> Wrong password or username\n' +
+                        '</div>' +
+                        "");
+                } else {
+                    $("#result_form").html("" +
+                        '<div class="alert alert-danger alert-dismissible">\n' +
+                        '  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+                        '  <strong>Error!</strong> The server might not be runing :s\n' +
+                        '</div>' +
+                        "");
+                }
+            });
+    });
+</script>
+</html>
