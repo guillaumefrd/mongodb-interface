@@ -12,7 +12,7 @@ Film = mongoose.model('Film');
 
 //Connection to mongoDB
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/films');
+mongoose.connect('mongodb://localhost/MOVIES');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -92,10 +92,10 @@ app.post('/upload', function(req, res){
 					var item = new Film(obj);
 				  item.save(function(err, data) {
 				    if (err){
-				      res.end('An error has occured during the importation !');
+				      res.end('error');
 				    }
 				    else{
-				      res.end('File successfully uploaded in the database !');
+				      res.end('success');
 				    }
 				  });
 				})
