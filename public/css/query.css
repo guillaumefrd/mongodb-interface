@@ -50,3 +50,7 @@
   font-size: 1em;
   margin-bottom: 0;
 }
+
+.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect {
+  color: #0596ff;
+}
