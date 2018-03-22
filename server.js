@@ -17,6 +17,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.static('public'));
+
+//Routes for css and js files
+app.get('/projetNOSQL/public/css/index.css',function(req,res){
+	res.sendFile( __dirname +"/public/css/" +"index.css");
+})
+app.get('/projetNOSQL/public/css/login.css',function(req,res){
+	res.sendFile( __dirname +"/public/css/" +"login.css");
+})
+app.get('/projetNOSQL/public/css/query.css',function(req,res){
+	res.sendFile( __dirname +"/public/css/" +"query.css");
+})
+app.get('/projetNOSQL/public/css/upload.css',function(req,res){
+	res.sendFile( __dirname +"/public/css/" +"upload.css");
+})
+app.get('/projetNOSQL/public/javascript/index.js',function(req,res){
+	res.sendFile( __dirname +"/public/javascript/" +"index.js");
+})
+app.get('/projetNOSQL/public/javascript/query.js',function(req,res){
+	res.sendFile( __dirname +"/public/javascript/" +"query.js");
+})
+app.get('/projetNOSQL/public/javascript/upload.js',function(req,res){
+	res.sendFile( __dirname +"/public/javascript/" +"upload.js");
+})
+
+
 app.get('/projetNOSQL/accueil',function(req,res){
 	res.sendFile( __dirname +"/public/" +"index.html");
 })
@@ -31,6 +56,12 @@ app.get('/projetNOSQL/admin',function(req,res){
 })
 app.get('/projetNOSQL/upload',function(req,res){
 	res.sendFile( __dirname +"/public/" +"upload.html");
+})
+app.get('/projetNOSQL/public/css/upload.css',function(req,res){
+	res.sendFile( __dirname +"/public/css/" +"upload.css");
+})
+app.get('/projetNOSQL/public/javascript/upload.js',function(req,res){
+	res.sendFile( __dirname +"/public/javascript/" +"upload.js");
 })
 
 app.post('/upload', function(req, res){

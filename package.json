@@ -1,7 +1,7 @@
 {
   "name": "esap_project",
   "version": "1.0.0",
-  "description": "Application for the ESILV embedded systems project A4",
+  "description": "Application for the ESILV NoSQL project A4",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -21,8 +21,6 @@
     "formidable": "^1.2.1",
     "fs": "0.0.1-security",
     "mongoose": "^5.0.6",
-    "node-cmd": "^3.0.0",
-    "node-slackr": "^0.1.4",
     "path": "^0.12.7"
   }
 }
