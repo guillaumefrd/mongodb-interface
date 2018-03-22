@@ -28,7 +28,23 @@ $('#upload-input').on('change', function(){
       processData: false,
       contentType: false,
       success: function(data){
-          console.log('upload successful!\n' + data);
+            $("#result_form").html("" +
+                '<div class="alert alert-success alert-dismissible">\n' +
+                '  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+                '  <strong>' + data + '</strong> You will be redirected...\n' +
+                '</div>' +
+                "");
+                setTimeout(function () {
+                window.location.replace("http://localhost:3000/projetNOSQL/index");
+            }, 2000);
+      },
+      error: function(data){
+            $("#result_form").html("" +
+                '<div class="alert alert-warning alert-dismissible">\n' +
+                '  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+                '  <strong>' + data + '</strong> Please retry\n' +
+                '</div>' +
+                "");
       },
       xhr: function() {
         // create an XMLHttpRequest
