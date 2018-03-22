@@ -12,7 +12,7 @@ Film = mongoose.model('Film');
 
 //Connection to mongoDB
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/MOVIES');
+mongoose.connect('mongodb://localhost/films');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -90,15 +90,14 @@ app.post('/upload', function(req, res){
 					var line = line.replace( "\n" , "" );
 					obj = JSON.parse(line);
 					var item = new Film(obj);
-					console.log(item.title);
-				  /*film.save(function(err, data) {
+				  item.save(function(err, data) {
 				    if (err){
 				      res.end('An error has occured during the importation !');
 				    }
 				    else{
 				      res.end('File successfully uploaded in the database !');
 				    }
-				  });*/
+				  });
 				})
     });
 	});
