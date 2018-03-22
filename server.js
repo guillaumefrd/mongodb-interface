@@ -8,6 +8,7 @@ bodyParser = require('body-parser');
 var path = require('path');
 var formidable = require('formidable');
 var fs = require('fs');
+Film = mongoose.model('Film');
 
 //Connection to mongoDB
 mongoose.Promise = global.Promise;
@@ -68,47 +69,43 @@ app.get('/projetNOSQL/public/javascript/upload.js',function(req,res){
 })
 
 app.post('/upload', function(req, res){
-
-  // create an incoming form object
+	// create an incoming form object
   var form = new formidable.IncomingForm();
-
-  // specify that we want to allow the user to upload multiple files in a single request
-  form.multiples = false;
-
-  // store all uploads in the /uploads directory
-  form.uploadDir = path.join(__dirname, '/uploads');
-
   // every time a file has been uploaded successfully,
-  // rename it to it's orignal name
+  // rename it to movies.json
   form.on('file', function(field, file) {
-    fs.rename(file.path, path.join(form.uploadDir, file.name));
+	  fs.rename(file.path, "movies.json");
   });
-
   // log any errors that occur
   form.on('error', function(err) {
-    console.log('An error has occured: \n' + err);
+    res.end('An error has occured: \n' + err);
   });
 
   // once all the files have been uploaded, send a response to the client
   form.on('end', function() {
-    res.end('success');
 		//add data to mongodb
-		fs.readFile('movies.json', {encoding: 'utf8'}, function (err, data) {
-        if(err) throw err;
-        var item = data.toString().split('\n');
-        items.push(item);
+		var items = [];
+		fs.readFile('movies.json', 'utf8', function (err, data) {
+        if(err) throw err
+
+        var lines = data.split('\n');
+
+				lines.forEach(function(line){
+					var film = new Film(line);
+				  film.save(function(err, data) {
+				    if (err){
+				      res.end('An error has occured during the importation !');
+				    }
+				    else{
+				      res.end('File successfully uploaded in the database !');
+				    }
+				  });
+				})
     });
-		var collection = db.collection('test');
-        for (var i = 0; i < items[0].length; i++) {
-            collection.insert(JSON.parse(items[0][i]), {safe: true}, function(err, docs) {
-                if(err) throw err;
-            })
-        }
 	});
 
   // parse the incoming request containing the form data
   form.parse(req);
-
 });
 
 app.post('/login', function(req, res){
@@ -126,11 +123,11 @@ app.post('/login', function(req, res){
 	}
 });
 
-//API part
+//Routes for the mongoDB API
 var routes = require('./api/routes/filmRoutes'); //importing route
 routes(app); //register the route
 
-
+//Start the server
 app.listen(port);
 
-console.log('REST API server started on: ' + port);
+console.log('Server started on port ' + port);
