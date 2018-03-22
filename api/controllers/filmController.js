@@ -12,8 +12,9 @@ exports.getAllFilms = function(req, res) {
 };
 
 exports.getFilmQuery = function(req, res) {
-  var query = req.body;
-  Film.find(query, function(err, data) {
+  var query1 = req.body;
+  var queryFinal = Film.find(query1).limit(50);
+  queryFinal.exec(function(err, data) {
     if (err)
       res.send(err);
     res.json(data);
