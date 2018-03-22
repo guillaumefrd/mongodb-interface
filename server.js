@@ -40,6 +40,9 @@ app.get('/projetNOSQL/public/javascript/query.js',function(req,res){
 app.get('/projetNOSQL/public/javascript/upload.js',function(req,res){
 	res.sendFile( __dirname +"/public/javascript/" +"upload.js");
 })
+app.get('/projetNOSQL/public/javascript/login.js',function(req,res){
+	res.sendFile( __dirname +"/public/javascript/" +"login.js");
+})
 
 
 app.get('/projetNOSQL/accueil',function(req,res){
@@ -48,8 +51,8 @@ app.get('/projetNOSQL/accueil',function(req,res){
 app.get('/projetNOSQL/login',function(req,res){
 	res.sendFile( __dirname +"/public/" +"login.html");
 })
-app.get('/projetNOSQL/user',function(req,res){
-	res.sendFile( __dirname +"/public/" +"user.html");
+app.get('/projetNOSQL/query',function(req,res){
+	res.sendFile( __dirname +"/public/" +"query.html");
 })
 app.get('/projetNOSQL/admin',function(req,res){
 	res.sendFile( __dirname +"/public/" +"admin.html");

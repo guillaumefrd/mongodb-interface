@@ -3,69 +3,54 @@
 <head>
     <title>NoSQL Application</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.teal-red.min.css" rel="stylesheet"/>
+    <link href="/projetNOSQL/public/css/login.css" rel="stylesheet"/>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 
 <div class="container">
-    <h2>Please log in</h2>
-    <div id="result_form"></div>
-    <form id="login_form">
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
-        </div>
-        <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Submit</button>
-    </form>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Movies Dataset</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/">Home</a>
+        <a class="nav-item nav-link active" href="/projetNOSQL/login">Configuration <span class="sr-only">(current)</span></a>
+      </div>
+    </div>
+  </nav>
 
+  <form id="login_form">
+      <div class="form-group">
+        <h2>Please log in</h2>
+          <label for="username">Username:</label>
+          <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+      </div>
+      <div class="form-group">
+          <label for="pwd">Password:</label>
+          <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="submitButton">Submit</button>
+  </form>
 
+  <div id="result_form"></div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/projetNOSQL/public/javascript/login.js"></script>
+
 </body>
-<script>
-    $("#login_form").submit(function (event) {
-        event.preventDefault();
-        var password = $("#pwd").val();
-        var username = $("#username").val();
-        var pageToRedirect = "projetNOSQL/admin";
-        $.post("http://localhost:3000/login",
-            {
-                username: username,
-                password: password
-            }, function (result) {
-                if (result === "true") {
-                    $("#result_form").html("" +
-                        '<div class="alert alert-success alert-dismissible">\n' +
-                        '  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
-                        '  <strong>Success!</strong> You will be redirected...\n' +
-                        '</div>' +
-                        "");
-                        setTimeout(function () {
-                        window.location.replace("http://localhost:3000/" + pageToRedirect);
-                    }, 2000);
-                } else if (result === "false") {
-                    $("#result_form").html("" +
-                        '<div class="alert alert-warning alert-dismissible">\n' +
-                        '  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
-                        '  <strong>Sorry!</strong> Wrong password or username\n' +
-                        '</div>' +
-                        "");
-                } else {
-                    $("#result_form").html("" +
-                        '<div class="alert alert-danger alert-dismissible">\n' +
-                        '  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
-                        '  <strong>Error!</strong> The server might not be runing :s\n' +
-                        '</div>' +
-                        "");
-                }
-            });
-    });
-</script>
 </html>
