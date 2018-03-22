@@ -61,24 +61,18 @@ app.get('/projetNOSQL/admin',function(req,res){
 app.get('/projetNOSQL/upload',function(req,res){
 	res.sendFile( __dirname +"/public/" +"upload.html");
 })
-app.get('/projetNOSQL/public/css/upload.css',function(req,res){
-	res.sendFile( __dirname +"/public/css/" +"upload.css");
-})
-app.get('/projetNOSQL/public/javascript/upload.js',function(req,res){
-	res.sendFile( __dirname +"/public/javascript/" +"upload.js");
-})
 
 app.post('/upload', function(req, res){
 	// create an incoming form object
   var form = new formidable.IncomingForm();
   // every time a file has been uploaded successfully,
   // rename it to movies.json
-  form.on('file', function(field, file) {
-	  fs.rename(file.path, "movies.json");
-  });
+  /*form.on('file', function(field, file) {
+	  fs.rename(file.path, "films.json");
+  });*/
   // log any errors that occur
   form.on('error', function(err) {
-    res.end('An error has occured: \n' + err);
+    console.log('An error has occured: \n' + err);
   });
 
   // once all the files have been uploaded, send a response to the client
@@ -91,15 +85,20 @@ app.post('/upload', function(req, res){
         var lines = data.split('\n');
 
 				lines.forEach(function(line){
-					var film = new Film(line);
-				  film.save(function(err, data) {
+					var line = line.replace( "{ \"_id\" : { \"$oid\" :" , "{ \"_id\" :" );
+					var line = line.replace( " }," , "," );
+					var line = line.replace( "\n" , "" );
+					obj = JSON.parse(line);
+					var item = new Film(obj);
+					console.log(item.title);
+				  /*film.save(function(err, data) {
 				    if (err){
 				      res.end('An error has occured during the importation !');
 				    }
 				    else{
 				      res.end('File successfully uploaded in the database !');
 				    }
-				  });
+				  });*/
 				})
     });
 	});

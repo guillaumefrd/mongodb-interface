@@ -42,7 +42,7 @@ $('#upload-input').on('change', function(){
             $("#result_form").html("" +
                 '<div class="alert alert-warning alert-dismissible">\n' +
                 '  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
-                '  <strong>' + data + '</strong> Please retry\n' +
+                '  <strong>Error...</strong> Please retry\n' +
                 '</div>' +
                 "");
       },
