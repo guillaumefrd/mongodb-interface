@@ -1,5 +1,16 @@
 var moviesTab = [];
+var queriesTab = [];
 $(document).ready(function(){
+    $.get('http://localhost:3000/getqueries', queries => {
+      queriesTab = queries;
+      var idx = 0;
+      queries.forEach(function(query){
+        $('#selectQuery').append("<option class=\"queryAdmin\" value="+idx+">"+query.title+"</option>")
+        idx++;
+      })
+    })
+
+
     $('#form').change(function(){
       if($('#form option:selected').val() == 'plot'){
         $('#query').html('<form><div class="form-group"><label for="inpuPlot">Plot</label><input type="text" class="form-control" id="inputPlot" placeholder="Enter words of a movie plot"></div></form>')
@@ -15,6 +26,10 @@ $(document).ready(function(){
       }
       else if($('#form option:selected').val() == 'rate'){
         $('#query').html('<form><div class="form-group"><label for="inputRateMin">Minimum rating</label><input type="text" class="form-control" id="inputRateMin" placeholder="Enter the minimum rate"></div><div class="form-group"><label for="inputRateMax">Maximum rating</label><input type="text" class="form-control" id="inputRateMax" placeholder="Enter the maximum rate"></div></form>')
+      }
+      else if($('#form option:selected').hasClass('queryAdmin')){
+        console.log($('#form option:selected').val())
+        $('#query').html('<form><div class="form-group"><label for="inputQuery">Query body</label><textarea class="form-control" id="inputQuery" rows="5">'+JSON.stringify(JSON.parse(queriesTab[$('#form option:selected').val()].query), null, 2)  +'</textarea><medium id="inputQueryHelp" class="form-text text-muted">Enter your query like the example, replacing the parameters by "***"</medium></div></form>');
       }
     });
 
@@ -54,10 +69,15 @@ $(document).ready(function(){
           ]
         }, movies => showResult(movies))
       }
+      else if($('#form option:selected').hasClass('queryAdmin')){
+        $.post('http://localhost:3000/film/query', JSON.parse($('#inputQuery').val()), movies => showResult(movies))
+      }
+
     })
 });
 
 function showResult(movies){
+  console.log(movies)
   moviesTab = movies;
   $("#grid").html("");
   if(movies.length > 0 && movies.length < 50) {

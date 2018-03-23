@@ -129,7 +129,7 @@ app.post('/login', function(req, res){
 	}
 });
 app.post('/addquery', function(req, res){
-	var queryReceived = req.body.query;
+	var queryReceived = req.body.query.replace(/\n/g,'');
 	var queryTitle = req.body.name;
 	var jsonString = "";
 
