@@ -66,3 +66,7 @@ Then, he/she can import the movies dataset.
 3. Query on rating
 
 ![screen_rating_title](https://raw.githubusercontent.com/guillaumefrd/mongodb-interface/master/img/screen_rating_search.PNG)
+
+4. Upload page
+
+![screen_upload](https://raw.githubusercontent.com/guillaumefrd/mongodb-interface/master/img/screen_upload.PNG)
