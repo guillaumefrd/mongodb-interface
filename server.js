@@ -87,11 +87,10 @@ app.post('/upload', function(req, res){
 
 			fs.readFile('movies.json', 'utf8', function (err, data) {
 					if(err) throw err
-
 					var lines = data.split('\n');
+					var idx = 0;
 
-					lines.forEach(function(line, idx){
-						if(idx < 5000){
+					lines.forEach(function(line){
 							var line = line.replace( "{ \"_id\" : { \"$oid\" :" , "{ \"_id\" :" );
 							var line = line.replace( " }," , "," );
 							var line = line.replace( "\n" , "" );
@@ -105,7 +104,8 @@ app.post('/upload', function(req, res){
 									res.end('success');
 								}
 							});
-						}
+
+						idx++;
 					})
 			});
 	});
