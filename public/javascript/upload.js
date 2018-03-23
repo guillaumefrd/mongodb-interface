@@ -36,7 +36,7 @@ $('#upload-input').on('change', function(){
                 '</div>' +
                 "");
                 setTimeout(function () {
-                window.location.replace("http://localhost:3000/projetNOSQL/index");
+                window.location.replace("http://localhost:3000/");
             }, 2000);
           }
         else{

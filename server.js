@@ -23,42 +23,36 @@ app.use(express.static('public'));
 app.get('/projetNOSQL/public/css/index.css',function(req,res){
 	res.sendFile( __dirname +"/public/css/" +"index.css");
 })
-app.get('/projetNOSQL/public/css/login.css',function(req,res){
+app.get('/public/css/login.css',function(req,res){
 	res.sendFile( __dirname +"/public/css/" +"login.css");
 })
-app.get('/projetNOSQL/public/css/query.css',function(req,res){
+app.get('/public/css/query.css',function(req,res){
 	res.sendFile( __dirname +"/public/css/" +"query.css");
 })
-app.get('/projetNOSQL/public/css/upload.css',function(req,res){
+app.get('/public/css/upload.css',function(req,res){
 	res.sendFile( __dirname +"/public/css/" +"upload.css");
 })
-app.get('/projetNOSQL/public/javascript/index.js',function(req,res){
+app.get('/public/javascript/index.js',function(req,res){
 	res.sendFile( __dirname +"/public/javascript/" +"index.js");
 })
-app.get('/projetNOSQL/public/javascript/query.js',function(req,res){
+app.get('/public/javascript/query.js',function(req,res){
 	res.sendFile( __dirname +"/public/javascript/" +"query.js");
 })
-app.get('/projetNOSQL/public/javascript/upload.js',function(req,res){
+app.get('/public/javascript/upload.js',function(req,res){
 	res.sendFile( __dirname +"/public/javascript/" +"upload.js");
 })
-app.get('/projetNOSQL/public/javascript/login.js',function(req,res){
+app.get('/public/javascript/login.js',function(req,res){
 	res.sendFile( __dirname +"/public/javascript/" +"login.js");
 })
 
 
-app.get('/projetNOSQL/accueil',function(req,res){
-	res.sendFile( __dirname +"/public/" +"index.html");
-})
-app.get('/projetNOSQL/login',function(req,res){
+app.get('/login',function(req,res){
 	res.sendFile( __dirname +"/public/" +"login.html");
 })
-app.get('/projetNOSQL/query',function(req,res){
+app.get('/query',function(req,res){
 	res.sendFile( __dirname +"/public/" +"query.html");
 })
-app.get('/projetNOSQL/admin',function(req,res){
-	res.sendFile( __dirname +"/public/" +"admin.html");
-})
-app.get('/projetNOSQL/upload',function(req,res){
+app.get('/admin',function(req,res){
 	res.sendFile( __dirname +"/public/" +"upload.html");
 })
 

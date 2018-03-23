@@ -3,7 +3,7 @@ $(document).ready(function(){
         event.preventDefault();
         var password = $("#pwd").val();
         var username = $("#username").val();
-        var pageToRedirect = "projetNOSQL/admin";
+        var pageToRedirect = "/admin";
         $.post("http://localhost:3000/login",
             {
                 username: username,
@@ -17,7 +17,7 @@ $(document).ready(function(){
                         '</div>' +
                         "");
                         setTimeout(function () {
-                        window.location.replace("http://localhost:3000/" + pageToRedirect);
+                        window.location.replace("http://localhost:3000" + pageToRedirect);
                     }, 2000);
                 } else if (result === "false") {
                     $("#result_form").html("" +
