@@ -29,7 +29,7 @@ $(document).ready(function(){
       }
       else if($('#form option:selected').hasClass('queryAdmin')){
         console.log($('#form option:selected').val())
-        $('#query').html('<form><div class="form-group"><label for="inputQuery">Query body</label><textarea class="form-control" id="inputQuery" rows="5">'+JSON.stringify(JSON.parse(queriesTab[$('#form option:selected').val()].query), null, 2)  +'</textarea><medium id="inputQueryHelp" class="form-text text-muted">Enter your query like the example, replacing the parameters by "***"</medium></div></form>');
+        $('#query').html('<form><div class="form-group"><label for="inputQuery">Query body</label><textarea class="form-control" id="inputQuery" rows="5">'+JSON.stringify(JSON.parse(queriesTab[$('#form option:selected').val()].query), null, 2)  +'</textarea><medium id="inputQueryHelp" class="form-text text-muted">Replace *** by the parameters</medium></div></form>');
       }
     });
 

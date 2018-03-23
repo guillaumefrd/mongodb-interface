@@ -2,5 +2,9 @@
   {
     "title": "titre",
     "query": "{\"title\":\"***\"}"
+  },
+  {
+    "title": "select plot",
+    "query": "{\"plot\": \"***\",\"rank\" : { \"$lte\": 100}}"
   }
 ]
