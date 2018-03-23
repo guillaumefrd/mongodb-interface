@@ -62,7 +62,10 @@ h2 {
 }
 
 @media (min-width: 992px) {
-  .container {
-    width: 450px;
-  }
+
+}
+
+#upload {
+  margin-left: auto;
+  margin-right: auto;
 }
