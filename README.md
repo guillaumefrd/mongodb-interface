@@ -11,6 +11,12 @@ The dataset contains the 5000 top sell movies on Amazon.
 ### Installation
 
 - open your **MongoDB** server (**mongod**)
+- open a **MongoDB Client** and run:
+```
+> use MOVIES
+
+> db.createCollection("films")
+```
 - copy the repository on your computer 
 - with the **Node.js** command prompt, go to the folder and run: 
 ```
