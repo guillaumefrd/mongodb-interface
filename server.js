@@ -65,41 +65,55 @@ app.get('/projetNOSQL/upload',function(req,res){
 app.post('/upload', function(req, res){
 	// create an incoming form object
   var form = new formidable.IncomingForm();
+
+  // specify that we want to allow the user to upload multiple files in a single request
+  form.multiples = false;
+
+  // store all uploads in the /uploads directory
+  form.uploadDir = __dirname;
+
   // every time a file has been uploaded successfully,
-  // rename it to movies.json
-  /*form.on('file', function(field, file) {
-	  fs.rename(file.path, "films.json");
-  });*/
+  // rename it to it's orignal name
+  form.on('file', function(field, file) {
+    fs.rename(file.path, path.join(form.uploadDir, "movies.json"), function(){
+
+		});
+  });
+
   // log any errors that occur
   form.on('error', function(err) {
     console.log('An error has occured: \n' + err);
   });
 
+
   // once all the files have been uploaded, send a response to the client
   form.on('end', function() {
 		//add data to mongodb
 		var items = [];
-		fs.readFile('movies.json', 'utf8', function (err, data) {
-        if(err) throw err
 
-        var lines = data.split('\n');
+			fs.readFile('movies.json', 'utf8', function (err, data) {
+					if(err) throw err
 
-				lines.forEach(function(line){
-					var line = line.replace( "{ \"_id\" : { \"$oid\" :" , "{ \"_id\" :" );
-					var line = line.replace( " }," , "," );
-					var line = line.replace( "\n" , "" );
-					obj = JSON.parse(line);
-					var item = new Film(obj);
-				  item.save(function(err, data) {
-				    if (err){
-				      res.end('error');
-				    }
-				    else{
-				      res.end('success');
-				    }
-				  });
-				})
-    });
+					var lines = data.split('\n');
+
+					lines.forEach(function(line, idx){
+						if(idx < 5000){
+							var line = line.replace( "{ \"_id\" : { \"$oid\" :" , "{ \"_id\" :" );
+							var line = line.replace( " }," , "," );
+							var line = line.replace( "\n" , "" );
+							obj = JSON.parse(line);
+							var item = new Film(obj);
+							item.save(function(err, data) {
+								if (err){
+									res.end('error');
+								}
+								else{
+									res.end('success');
+								}
+							});
+						}
+					})
+			});
 	});
 
   // parse the incoming request containing the form data
