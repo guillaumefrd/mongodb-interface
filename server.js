@@ -17,6 +17,7 @@ mongoose.connect('mongodb://localhost/MOVIES');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
+app.use(express.static('queries'));
 
 //Routes for css and js files
 app.get('/projetNOSQL/public/css/index.css',function(req,res){
@@ -55,7 +56,7 @@ app.get('/admin',function(req,res){
 	res.sendFile( __dirname +"/public/" +"upload.html");
 })
 
-//Routes for receive data from client
+//Routes for receive data from client or send the json file with queries
 app.post('/upload', function(req, res){
 	// create an incoming form object
   var form = new formidable.IncomingForm();
@@ -163,6 +164,9 @@ app.post('/addquery', function(req, res){
 		});
 	});
 });
+app.get('/getqueries',function(req,res){
+	res.sendFile( __dirname +"/queries/" + "queries.json");
+})
 
 //Routes for the mongoDB API
 var routes = require('./api/routes/filmRoutes'); //importing route
