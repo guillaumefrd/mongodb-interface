@@ -16,7 +16,6 @@ mongoose.connect('mongodb://localhost/MOVIES');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 app.use(express.static('public'));
 
 //Routes for css and js files
@@ -45,7 +44,7 @@ app.get('/public/javascript/login.js',function(req,res){
 	res.sendFile( __dirname +"/public/javascript/" +"login.js");
 })
 
-
+//Routes for html files
 app.get('/login',function(req,res){
 	res.sendFile( __dirname +"/public/" +"login.html");
 })
@@ -56,6 +55,7 @@ app.get('/admin',function(req,res){
 	res.sendFile( __dirname +"/public/" +"upload.html");
 })
 
+//Routes for receive data from client
 app.post('/upload', function(req, res){
 	// create an incoming form object
   var form = new formidable.IncomingForm();
@@ -113,7 +113,6 @@ app.post('/upload', function(req, res){
   // parse the incoming request containing the form data
   form.parse(req);
 });
-
 app.post('/login', function(req, res){
 	var true_username = "prof";
 	var true_password = "prof";
@@ -127,6 +126,42 @@ app.post('/login', function(req, res){
 	else{
 		res.end('false');
 	}
+});
+app.post('/addquery', function(req, res){
+	var queryReceived = req.body.query;
+	var queryTitle = req.body.name;
+	var jsonString = "";
+
+	function read(filePath, cb){
+	  var str = '';
+	  fs.readFile(filePath, 'utf8', function(err, data){
+	    if(err) throw err;
+	    cb(data);
+	  });
+	}
+
+	read('queries\\queries.json', function(data) {
+		var Obj = JSON.parse(data);
+
+		var newquery = {
+				title: queryTitle,
+				query: queryReceived
+		};
+
+		Obj.push(newquery);
+		jsonString = JSON.stringify(Obj, null, 2);
+
+		fs.writeFile("queries\\queries.json", jsonString, 'utf8', function (err) {
+	    if (err) {
+	      console.log(err);
+				res.end('false');
+	    }
+			else {
+				console.log("JSON file has been saved.");
+				res.end('true');
+			}
+		});
+	});
 });
 
 //Routes for the mongoDB API
