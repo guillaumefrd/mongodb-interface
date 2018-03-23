@@ -7,10 +7,6 @@ body {
   height: 100%;
 }
 
-body {
-  text-align: center;
-}
-
 .row {
   margin-top: 80px;
 }
@@ -30,19 +26,19 @@ body {
   border: none;
 }
 
-h4 {
+#upload h4 {
   padding-bottom: 30px;
-  color: #B8BDC1;
+  color: #fff;
 }
 
 .glyphicon {
   font-size: 5em;
-  color: #9CA3A9;
+  color: #fff;
 }
 
-h2 {
+#upload h2 {
   margin-top: 15px;
-  color: #68757E;
+  color: #fff;
 }
 
 .panel {
@@ -67,4 +63,13 @@ h2 {
 #upload {
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
+}
+
+#uploadRow {
+  background-color: #82beff
+}
+
+#buttonAdd {
+  margin-bottom: 20px;
 }

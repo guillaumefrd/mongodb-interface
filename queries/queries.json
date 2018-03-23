@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "title": "title",
+    "query": "{\n\"title\": \"***\"\n}"
+  },
+  {
+    "title": "title",
+    "query": "dqsdsqdqsd\n"
+  }
+]
